@@ -1,11 +1,15 @@
-#include <cassert>
 #include <iostream>
+#include <cassert>
 
 #include "board.hpp"
 #include "board_printer.hpp"
 
+using namespace std;
 /*
-int main() {
+int main()
+{
+    cout << "Running the tests..." << endl;
+
     Board board;
     BoardPrinter *boardPrinter = new BoardPrinter(&board);
 
@@ -19,25 +23,25 @@ int main() {
 
     board.move(3, "W");
     assert(boardPrinter->print() == " X | O | W \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 ");
-    
-    board.move(4, "H");
-    assert(boardPrinter->print() == " X | O | W \n-----------\n H | 5 | 6 \n-----------\n 7 | 8 | 9 ");
-    
-    board.move(5, "Y");
-    assert(boardPrinter->print() == " X | O | W \n-----------\n H | Y | 6 \n-----------\n 7 | 8 | 9 ");
-    
-    board.move(6, "M");
-    assert(boardPrinter->print() == " X | O | W \n-----------\n H | Y | M \n-----------\n 7 | 8 | 9 ");
-    
-    board.move(7, "N");
-    assert(boardPrinter->print() == " X | O | W \n-----------\n H | Y | M \n-----------\n N | 8 | 9 ");
-    
-    board.move(8, "K");
-    assert(boardPrinter->print() == " X | O | W \n-----------\n H | Y | M \n-----------\n N | K | 9 ");
-    
-    board.move(9, "A");
-    assert(boardPrinter->print() == " X | O | W \n-----------\n H | Y | M \n-----------\n N | K | A ");
-    
-    cout << "All tests passed!" <<endl;
-}*/
 
+    board.move(4, "V");
+    assert(boardPrinter->print() == " X | O | W \n-----------\n V | 5 | 6 \n-----------\n 7 | 8 | 9 ");
+
+    board.move(5, "P");
+    assert(boardPrinter->print() == " X | O | W \n-----------\n V | P | 6 \n-----------\n 7 | 8 | 9 ");
+
+    board.move(6, "L");
+    assert(boardPrinter->print() == " X | O | W \n-----------\n V | P | L \n-----------\n 7 | 8 | 9 ");
+
+    board.move(7, "M");
+    assert(boardPrinter->print() == " X | O | W \n-----------\n V | P | L \n-----------\n M | 8 | 9 ");
+
+    board.move(8, "H");
+    assert(boardPrinter->print() == " X | O | W \n-----------\n V | P | L \n-----------\n M | H | 9 ");
+
+    board.move(9, "F");
+    assert(boardPrinter->print() == " X | O | W \n-----------\n V | P | L \n-----------\n M | H | F ");
+
+    cout << "All of the tests have passed!" << endl;
+}
+*/

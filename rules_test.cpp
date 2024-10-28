@@ -6,144 +6,144 @@
 
 using namespace std;
 /*
-int main() {
+int main()
+{
     cout << "Starting the tests" << endl;
 
     Board board;
     Rules *rules = new Rules(&board);
 
     assert(rules->inProgress());
+    assert(rules->status() == "");
 
     board.move(1, "X");
     assert(rules->inProgress());
+    assert(rules->status() == "");
 
     board.move(2, "X");
     assert(rules->inProgress());
+    assert(rules->status() == "");
 
     board.move(3, "X");
     assert(!rules->inProgress());
-
-    board.clear();
-
-    board.move(1, "O");
-    assert(rules->inProgress());
-
-    board.move(2, "O");
-    assert(rules->inProgress());
-
-    board.move(3, "O");
-    assert(!rules->inProgress());
+    assert(rules->status() == "X wins the game!");
 
     board.clear();
     
-    board.move(4, "S");
-    assert(rules->inProgress());
-
-    board.move(5, "S");
-    assert(rules->inProgress());
-
-    board.move(6, "S");
-    assert(!rules->inProgress());
-    
-    board.clear();
-   
-    board.move(7, "Y");
-    assert(rules->inProgress());
-
-    board.move(8, "Y");
-    assert(rules->inProgress());
-
-    board.move(9, "Y");
-    assert(!rules->inProgress());
-    
-    board.clear();
-
-    board.move(1, "F");
+    board.move(4, "O");
     assert(rules->inProgress());
     assert(rules->status() == "");
 
-    board.move(4, "F");
+    board.move(5, "O");
     assert(rules->inProgress());
     assert(rules->status() == "");
 
-    board.move(7, "F");
+    board.move(6, "O");
     assert(!rules->inProgress());
-    assert(rules->status() == "F");
+    assert(rules->status() == "O wins the game!");
 
     board.clear();
-
-    board.move(2, "P");
     assert(rules->inProgress());
 
-    board.move(5, "P");
+    board.move(7, "H");
     assert(rules->inProgress());
+    assert(rules->status() == "");
 
-    board.move(8, "P");
-    assert(!rules->inProgress());
- 
-    board.clear();
-    
-    board.move(3, "W");
-    assert(rules->inProgress());
-
-    board.move(6, "W");
-    assert(rules->inProgress());
-
-    board.move(9, "W");
-    assert(!rules->inProgress());
-    
-    board.clear();
-    
-    board.move(1, "T");
-    assert(rules->inProgress());
-
-    board.move(5, "T");
-    assert(rules->inProgress());
-
-    board.move(9, "T");
-    assert(!rules->inProgress());
-    
-    board.clear();
-    
-    board.move(3, "V");
-    assert(rules->inProgress());
-
-    board.move(5, "V");
-    assert(rules->inProgress());
-
-    board.move(7, "V");
-    assert(!rules->inProgress());
-
-    board.clear();
-    
-    board.move(1, "A");
-    assert(rules->inProgress());
-    
-    board.move(2, "B");
-    assert(rules->inProgress());
-    
-    board.move(3, "C");
-    assert(rules->inProgress());
-    
-    board.move(4, "D");
-    assert(rules->inProgress());
-    
-    board.move(5, "E");
-    assert(rules->inProgress());
-    
-    board.move(6, "F");
-    assert(rules->inProgress());
-    
-    board.move(7, "G");
-    assert(rules->inProgress());
-    
     board.move(8, "H");
     assert(rules->inProgress());
- 
+    assert(rules->status() == "");
+
+    board.move(9, "H");
+    assert(!rules->inProgress());
+    assert(rules->status() == "H wins the game!");
+
+    board.clear();
+    assert(rules->inProgress());
+
+    board.move(1, "H");
+    assert(rules->inProgress());
+    assert(rules->status() == "");
+
+    board.move(4, "H");
+    assert(rules->inProgress());
+    assert(rules->status() == "");
+
+    board.move(7, "H");
+    assert(!rules->inProgress());
+    assert(rules->status() == "H wins the game!");
+
+    board.clear();
+    assert(rules->inProgress());
+
+    board.move(2, "H");
+    assert(rules->inProgress());
+    assert(rules->status() == "");
+
+    board.move(5, "H");
+    assert(rules->inProgress());
+    assert(rules->status() == "");
+
+    board.move(8, "H");
+    assert(!rules->inProgress());
+    assert(rules->status() == "H wins the game!");
+
+    board.clear();
+    assert(rules->inProgress());
+
+    board.move(3, "H");
+    assert(rules->inProgress());
+    assert(rules->status() == "");
+
+    board.move(6, "H");
+    assert(rules->inProgress());
+    assert(rules->status() == "");
+
+    board.move(9, "H");
+    assert(!rules->inProgress());
+    assert(rules->status() == "H wins the game!");
+
+    board.clear();
+    assert(rules->inProgress());
+
+    board.move(1, "H");
+    assert(rules->inProgress());
+    assert(rules->status() == "");
+
+    board.move(5, "H");
+    assert(rules->inProgress());
+    assert(rules->status() == "");
+
+    board.move(9, "H");
+    assert(!rules->inProgress());
+    assert(rules->status() == "H wins the game!");
+
+    board.clear();
+    assert(rules->inProgress());
+
+    board.move(3, "H");
+    assert(rules->inProgress());
+    assert(rules->status() == "");
+
+    board.move(5, "H");
+    assert(rules->inProgress());
+    assert(rules->status() == "");
+
+    board.move(7, "H");
+    assert(!rules->inProgress());
+    assert(rules->status() == "H wins the game!");
+
+    board.move(1, "A");
+    board.move(2, "B");
+    board.move(3, "C");
+    board.move(4, "D");
+    board.move(5, "E");
+    board.move(6, "F");
+    board.move(7, "G");
+    board.move(8, "H");
     board.move(9, "I");
     assert(!rules->inProgress());
-    assert(rules->status() == "T");
-    
+    assert(rules->status() == "Tie game!");
+
     cout << "All of the tests passed!" << endl;
 }
 */
