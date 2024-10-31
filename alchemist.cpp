@@ -53,7 +53,7 @@ void Alchemist::move()
         {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "Invalid move, Please try again:" << endl;
+            cout << "That's not a number. Please try again:" << endl;
         }
         int validInput = this->validator(userInput);
         board->move(validInput, this->mark);
@@ -69,7 +69,7 @@ void Alchemist::move()
             {
                 cin.clear();
                 cin.ignore(1000, '\n');
-                cout << "Invalid move, Please try again:" << endl;
+                cout << "That's not a number. Please try again:" << endl;
             }
             int validInput = this->validator(userInput);
             board->move(validInput, this->mark);
@@ -84,21 +84,27 @@ int Alchemist::validator(int potentiallyInvalidInput)
 {
     int validInput = potentiallyInvalidInput;
     
-    while (board->isOccupied(validInput) || (validInput < 0 || validInput > 9))
+    while (board->isOccupied(validInput) || (validInput < 1 || validInput > 9))
     {
-        std::cout << "Invalid move, Please try again: " << endl;
+        if (board->isOccupied(validInput)) {
+            cout << "That space is occupied. Please try again:";
+        }
+        if ((validInput < 1 || validInput > 9)) {
+            cout << "That space doesn't exist. Please try again:";
+        }
+        cout << endl;
         while (!(cin >> validInput))
         {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "Invalid move, Please try again:" << endl;
+            cout << "That's not a number. Please try again:" << endl;
         }
     }
     return validInput;
 }
 
 void Alchemist::specialMove() {
-    string invalidMark = "Invalid mark, Please try again:";
+    string invalidMark = "That's not a number. Please try again:";
     int userInput1;
     int userInput2;
     
@@ -110,8 +116,13 @@ void Alchemist::specialMove() {
         cin.ignore(1000, '\n');
         cout << invalidMark << endl;
     }
-    while (!board->isOccupied(userInput1) || (userInput1 < 0 || userInput1 > 9) ) {
-        cout << invalidMark << endl;
+    while (!board->isOccupied(userInput1) || (userInput1 < 1 || userInput1 > 9) ) {
+        if (!board->isOccupied(userInput1)) {
+            cout << "That space is empty. Please try again:";
+        }
+        if ((userInput1 < 1 || userInput1 > 9)) {
+            cout << "That space doesn't exist. Please try again:";
+        }
         while (!(cin >> userInput1))
         {
             cin.clear();
@@ -129,8 +140,24 @@ void Alchemist::specialMove() {
         cin.ignore(1000, '\n');
         cout << invalidMark << endl;
     }
-    while (!board->isOccupied(userInput2) || (userInput2 < 0 || userInput2 > 9) || userInput1 == userInput2) {
-        cout << invalidMark << endl;
+    
+    string mark1 = board->getValue(userInput2);
+    string mark2 = board->getValue(userInput1);
+    
+    while (!board->isOccupied(userInput2) || (userInput2 < 1 || userInput2 > 9) || userInput1 == userInput2 || mark1 == mark2) {
+        if (!board->isOccupied(userInput2)) {
+            cout << "That space is empty. Please try again:";
+        }
+        if ((userInput2 < 1 || userInput2 > 9)) {
+            cout << "That space doesn't exist. Please try again:";
+        }
+        if (userInput1 == userInput2) {
+            cout << "That's the same space! Please try again:";
+        }
+        else {
+            cout << "You must swap with the other mark. Please try again:";
+        }
+        cout << endl;
         while (!(cin >> userInput2))
         {
             cin.clear();
@@ -139,9 +166,6 @@ void Alchemist::specialMove() {
         }
         
     }
-    
-    string mark1 = board->getValue(userInput2);
-    string mark2 = board->getValue(userInput1);
     
     board->move(userInput1, mark1);
     board->move(userInput2, mark2);

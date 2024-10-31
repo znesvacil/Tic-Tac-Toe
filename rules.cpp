@@ -59,14 +59,20 @@ bool Rules::inProgress()
 int Rules::validator(int potentiallyInvalidInput)
 {
     int validInput = potentiallyInvalidInput;
-    while (board->isOccupied(validInput) || (validInput < 0 || validInput > 9))
+    while (board->isOccupied(validInput) || (validInput < 1 || validInput > 9))
     {
-        cout << "Invalid move, Please try again: "  << endl;
+        if (board->isOccupied(validInput)) {
+            cout << "That space is occupied. Please try again:";
+        }
+        if ((validInput < 1 || validInput > 9)) {
+            cout << "That space doesn't exist. Please try again:";
+        }
+        cout << endl;
         while (!(cin >> validInput))
         {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "Invalid move, Please try again:" << endl;
+            cout << "That's not a number. Please try again:" << endl;
         }
     }
     return validInput;

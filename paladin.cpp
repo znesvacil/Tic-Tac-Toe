@@ -53,7 +53,7 @@ void Paladin::move()
         {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "Invalid move, Please try again:" << endl;
+            cout << "That's not a number. Please try again:" << endl;
         }
         int validInput = this->validator(userInput);
         board->move(validInput, this->mark);
@@ -68,7 +68,7 @@ void Paladin::move()
             {
                 cin.clear();
                 cin.ignore(1000, '\n');
-                cout << "Invalid move, Please try again:" << endl;
+                cout << "That's not a number. Please try again:" << endl;
             }
             int validInput = this->validator(userInput);
             board->move(validInput, this->mark);
@@ -84,21 +84,27 @@ int Paladin::validator(int potentiallyInvalidInput)
 {
     int validInput = potentiallyInvalidInput;
 
-    while (board->isOccupied(validInput) || (validInput < 0 || validInput > 9))
+    while (board->isOccupied(validInput) || (validInput < 1 || validInput > 9))
     {
-        std::cout << "Invalid move, Please try again: " << endl;
+        if (board->isOccupied(validInput)) {
+            cout << "That space is occupied. Please try again:";
+        }
+        if ((validInput < 1 || validInput > 9)) {
+            cout << "That space doesn't exist. Please try again:";
+        }
+        cout << endl;
         while (!(cin >> validInput))
         {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "Invalid move, Please try again:" << endl;
+            cout << "That's not a number. Please try again:" << endl;
         }
     }
     return validInput;
 }
 
 void Paladin::specialMove() {
-    string invalidMark = "Invalid mark, Please try again:";
+    string invalidMark = "That's not a number. Please try again:";
     int userInput1;
     int userInput2;
     
@@ -110,8 +116,14 @@ void Paladin::specialMove() {
         cin.ignore(1000, '\n');
         cout << invalidMark << endl;
     }
-    while (!board->isOccupied(userInput1) || (userInput1 < 0 || userInput1 > 9) ) {
-        cout << invalidMark << endl;
+    while (!board->isOccupied(userInput1) || (userInput1 < 1 || userInput1 > 9) ) {
+        if (!board->isOccupied(userInput1)) {
+            cout << "That space is empty. Please try again:";
+        }
+        if ((userInput1 < 1 || userInput1 > 9)) {
+            cout << "That space doesn't exist. Please try again:";
+        }
+        cout << endl;
         while (!(cin >> userInput1))
         {
             cin.clear();
@@ -129,8 +141,20 @@ void Paladin::specialMove() {
         cin.ignore(1000, '\n');
         cout << invalidMark << endl;
     }
-    while (board->isOccupied(userInput2) || (userInput2 < 0 || userInput2 > 9) || !adjacentTile(userInput1, userInput2)) {
-        cout << invalidMark << endl;
+    while (board->isOccupied(userInput2) || (userInput2 < 1 || userInput2 > 9) || !adjacentTile(userInput1, userInput2) || userInput1 == userInput2) {
+        if (board->isOccupied(userInput2)) {
+            cout << "That space is occupied. Please try again:";
+        }
+        if ((userInput2 < 1 || userInput2 > 9)) {
+            cout << "That space doesn't exist. Please try again:";
+        }
+        if (!adjacentTile(userInput1, userInput2)) {
+            cout << "That space is too far. Please try again:";
+        }
+        if (userInput1 == userInput2) {
+            cout << "That's the same space! Please try again:";
+        }
+        cout << endl;
         while (!(cin >> userInput2))
         {
             cin.clear();
@@ -148,7 +172,7 @@ void Paladin::specialMove() {
 
 bool Paladin::adjacentTile(int input1, int input2) //Is there a more efficient way to do this? I'd very much love to know 
 {
-    if (input1 == 1 && (input2 == 2 || input2 ==4 || input2 == 5)) {
+    if (input1 == 1 && (input2 == 2 || input2 == 4 || input2 == 5)) {
         return true;
     }
     else if (input1 == 2 && (input2 == 1 || input2 == 3 || input2 == 4 || input2 == 5 || input2 == 6)) {

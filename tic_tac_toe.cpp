@@ -20,7 +20,7 @@ void TicTacToe::start()
         {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "Invalid move, Please try again:" << endl;
+            cout << "That's not a number. Please try again:" << endl;
         }
         int validInput = rules->validator(userInput);
         board->move(validInput, this->getCurrentMark());

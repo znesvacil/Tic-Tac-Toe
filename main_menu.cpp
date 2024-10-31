@@ -94,7 +94,7 @@ void MainMenu::buildAndPlayGame()
             std::cout << "Player 1: Choose your mark!" << std::endl;
             cin >> playerOneMark;
             while (invalidMark(playerOneMark)) {
-                std::cout << "That mark is invalid. Try again!" << endl;
+                std::cout << "That mark is invalid. Use a letter, or these symbols: ?, !, *, ~, $, %, #. Try again:" << endl;
                 cin >> playerOneMark;
             }
             
@@ -125,7 +125,12 @@ void MainMenu::buildAndPlayGame()
             std::cout << "Player 2: Choose your mark!" << std::endl;
             cin >> playerTwoMark;
             while (invalidMark(playerTwoMark) || tolower(playerTwoMark[0]) == tolower(playerOneMark[0])) {
-                std::cout << "That mark is invalid. Try again!" << endl;
+                if (tolower(playerTwoMark[0]) == tolower(playerOneMark[0])) {
+                    std::cout << "Please use a different mark from your opponent. Try again:" << endl;
+                }
+                else {
+                    std::cout << "That mark is invalid. Use a letter, or these symbols: ?, !, *, ~, $, %, #. Try again:" << endl;
+                }
                 cin >> playerTwoMark;
             }
             
