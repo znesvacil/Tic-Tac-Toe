@@ -24,11 +24,13 @@ void TicTacToe::start()
         }
         int validInput = rules->validator(userInput);
         board->move(validInput, this->getCurrentMark());
+        cin.clear();
         cout << boardPrinter->print() << endl;
         this->toggleMark();
     }
 
     cout << rules->status() << endl;
+    
 }
 
 void TicTacToe::toggleMark()

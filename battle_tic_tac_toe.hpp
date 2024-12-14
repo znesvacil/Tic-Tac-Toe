@@ -7,6 +7,7 @@
 #include "board_printer.hpp"
 #include "player.hpp"
 
+
 class BattleTicTacToe
 {
 private:

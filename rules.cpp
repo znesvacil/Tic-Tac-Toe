@@ -7,6 +7,7 @@ using namespace std;
 Rules::Rules(Board *board)
 {
     this->board = board;
+    
     winningCombos[0][0] = 1;
     winningCombos[0][1] = 2;
     winningCombos[0][2] = 3;
@@ -68,6 +69,7 @@ int Rules::validator(int potentiallyInvalidInput)
             cout << "That space doesn't exist. Please try again:";
         }
         cout << endl;
+        cin.clear();
         while (!(cin >> validInput))
         {
             cin.clear();

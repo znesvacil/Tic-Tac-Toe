@@ -51,11 +51,12 @@ bool MainMenu::invalidMark(string mark)
     return true;
 }
 
-void MainMenu::buildAndPlayGame()
+void MainMenu::buildAndPlayGame(Data data)
 {
     Board *board = new Board();
-    Rules *rules = new Rules(board);
     BoardPrinter *boardPrinter = new BoardPrinter(board);
+    Rules *rules = new Rules(board);
+    
     int option;
     int playerOneCharacter;
     int playerTwoCharacter;
@@ -88,15 +89,18 @@ void MainMenu::buildAndPlayGame()
             TicTacToe *ticTacToe = new TicTacToe(rules, board, boardPrinter);
             ticTacToe->start();
             delete ticTacToe;
+            rules->playerOne = "X";
+            rules->playerTwo = "O";
         }
         else
         {
             std::cout << "Player 1: Choose your mark!" << std::endl;
             cin >> playerOneMark;
             while (invalidMark(playerOneMark)) {
-                std::cout << "That mark is invalid. Use a letter, or these symbols: ?, !, *, ~, $, %, #. Try again:" << endl;
+                std::cout << "That mark is invalid. Use one letter, or one of these symbols: ?, !, *, ~, $, %, #. Try again:" << endl;
                 cin >> playerOneMark;
             }
+            rules->playerOne = playerOneMark;
             
             std::cout << "Ok Player 1, Now choose your character!" << std::endl;
             printCharacterOptions();
@@ -113,6 +117,7 @@ void MainMenu::buildAndPlayGame()
             {
                 cout << "Invalid option!" << endl;
                 printCharacterOptions();
+                cin.clear();
                 while (!(cin >> playerOneCharacter))
                 {
                     cin.clear();
@@ -129,10 +134,11 @@ void MainMenu::buildAndPlayGame()
                     std::cout << "Please use a different mark from your opponent. Try again:" << endl;
                 }
                 else {
-                    std::cout << "That mark is invalid. Use a letter, or these symbols: ?, !, *, ~, $, %, #. Try again:" << endl;
+                    std::cout << "That mark is invalid. Use one letter, or one of these symbols: ?, !, *, ~, $, %, #. Try again:" << endl;
                 }
                 cin >> playerTwoMark;
             }
+            rules->playerTwo = playerTwoMark;
             
             std::cout << "Ok Player 2, Now choose your character!" << std::endl;
             printCharacterOptions();
@@ -149,6 +155,7 @@ void MainMenu::buildAndPlayGame()
             {
                 cout << "Invalid option!" << endl;
                 printCharacterOptions();
+                cin.clear();
                 while (!(cin >> playerTwoCharacter))
                 {
                     cin.clear();
@@ -200,14 +207,29 @@ void MainMenu::buildAndPlayGame()
             }
         }
     
+    data.totalGameCounter++;
+    
+    if (rules->status() == "Tie game!")
+    {
+        data.tieGameCounter++;
+    }
+    
+    if (rules->status() == (rules->playerOne + " wins the game!"))
+    {
+        data.playerOneWins++;
+    }
+    
+    if (rules->status() == (rules->playerTwo + " wins the game!"))
+    {
+        data.playerTwoWins++;
+    }
+    
     delete board;
     delete rules;
     delete boardPrinter;
-}
-
-void MainMenu::playAgainOrExit()
-{
-    int option;
+    
+    printPlayAgainMessage();
+    
     while (!(cin >> option))
     {
         cin.clear();
@@ -218,6 +240,7 @@ void MainMenu::playAgainOrExit()
     while (option != 1 && option != 2) {
         std::cout << "Invalid option!" << endl;
         printPlayAgainMessage();
+        cin.clear();
         while (!(cin >> option))
         {
             cin.clear();
@@ -228,18 +251,17 @@ void MainMenu::playAgainOrExit()
     }
     if (option == 1)
     {
-        start();
+        start(data);
     }
     else
     {
         printExitMessage();
+        data.printFile();
     }
 }
 
-void MainMenu::start()
+void MainMenu::start(Data data)
 {
     printWelcomeMessage();
-    buildAndPlayGame();
-    printPlayAgainMessage();
-    playAgainOrExit();
+    buildAndPlayGame(data);
 }

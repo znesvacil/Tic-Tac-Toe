@@ -33,6 +33,7 @@ int Alchemist::selectOneOrTwo()
     }
     while (option != 1 && option != 2) {
         std::cout << "Invalid option!" << endl;
+        cin.clear();
         while (!(cin >> option))
         {
             cin.clear();
@@ -57,6 +58,7 @@ void Alchemist::move()
         }
         int validInput = this->validator(userInput);
         board->move(validInput, this->mark);
+        cin.clear();
     }
     
     else
@@ -93,6 +95,7 @@ int Alchemist::validator(int potentiallyInvalidInput)
             cout << "That space doesn't exist. Please try again:";
         }
         cout << endl;
+        cin.clear();
         while (!(cin >> validInput))
         {
             cin.clear();
@@ -123,6 +126,7 @@ void Alchemist::specialMove() {
         if ((userInput1 < 1 || userInput1 > 9)) {
             cout << "That space doesn't exist. Please try again:";
         }
+        cin.clear();
         while (!(cin >> userInput1))
         {
             cin.clear();
@@ -158,6 +162,7 @@ void Alchemist::specialMove() {
             cout << "You must swap with the other mark. Please try again:";
         }
         cout << endl;
+        cin.clear();
         while (!(cin >> userInput2))
         {
             cin.clear();

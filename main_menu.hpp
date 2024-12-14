@@ -1,17 +1,17 @@
 #pragma once
+#include "data.hpp"
 
 class MainMenu
 {
 private:
-    void playAgainOrExit();
     void printExitMessage();
     void printPlayAgainMessage();
     void printWelcomeMessage();
     void printCharacterOptions();
-    void buildAndPlayGame();
+    void buildAndPlayGame(Data data);
     bool invalidMark(std::string mark);
     
 
 public:
-    void start();
+    void start(Data data);
 };

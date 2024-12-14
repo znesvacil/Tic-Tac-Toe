@@ -13,6 +13,7 @@ private:
     int selectOneOrTwo();
     void specialMove();
     bool adjacentTile(int input1, int input2);
+    bool surrounded(int input1);
 
 public:
     Paladin(Board *, std::string);

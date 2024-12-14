@@ -16,4 +16,6 @@ public:
     Rules(Board *board);
     bool inProgress();
     string status();
+    string playerOne;
+    string playerTwo;
 };
